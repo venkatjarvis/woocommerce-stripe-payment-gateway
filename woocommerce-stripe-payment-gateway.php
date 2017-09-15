@@ -35,7 +35,7 @@
 			          'type' => 'checkbox',
 			          'label' => __('Enable Stripe Subscription', 'woocommerce'),
 			          'default' => 'yes'
-			        ),			        
+			        ),
 			        'stripe_secrete_key' => array(
 			          'title' => __('Stripe Secret Key', 'woocommerce'),
 			          'type' => 'text',
@@ -66,7 +66,7 @@
 			    	$order = wc_get_order( $order_id );
 			    	$stripe_token=$_POST['stripe_token'];
 			    	$amount=$order->get_total()*100;
-			    	\Stripe\Stripe::setApiKey(get_option('woocommerce_stripe_subscription_settings')['stripe_secrete_key']);			    	
+			    	\Stripe\Stripe::setApiKey(get_option('woocommerce_stripe_subscription_settings')['stripe_secrete_key']);
 			    	\Stripe\Charge::create(array(
 					  "amount" => $amount,
 					  "currency" => get_option('woocommerce_currency'),
@@ -82,7 +82,7 @@
 				    );
 				}
 				function process_refund($order_id){
-					
+					$stripe_token=$_POST['stripe_token'];
 				}
 			}
 			function add_stripe_gateway_class( $methods ) {
@@ -95,7 +95,7 @@
 			function add_stripe_action_links( $links ) {
 				$setting_link = get_stripe_setting_link();
 				$plugin_links = array(
-					'<a href="' . $setting_link . '">' . __( 'Settings', 'woocommerce-gateway-stripe' ) . '</a>',					
+					'<a href="' . $setting_link . '">' . __( 'Settings', 'woocommerce-gateway-stripe' ) . '</a>',
 				);
 				return array_merge( $plugin_links, $links );
 			}
@@ -106,7 +106,7 @@
 		add_action( 'wp_enqueue_scripts', 'woo_stripe_script' );
 		function woo_stripe_script(){
 			if(is_checkout()){
-				wp_enqueue_script( 'woo-stripe-checkout', 'https://checkout.stripe.com/v2/checkout.js', false );				
+				wp_enqueue_script( 'woo-stripe-checkout', 'https://checkout.stripe.com/v2/checkout.js', false );
 				wp_enqueue_script('woo-stripe-custom-js',plugins_url('woocommerce-stripe/src/js/stripe-custom-js.js'),false);
 			}
 		}
