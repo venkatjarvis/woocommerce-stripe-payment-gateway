@@ -82,7 +82,9 @@
 				    );
 				}
 				function process_refund($order_id){
-					
+					?>
+					<p>git test</p>
+					<?php
 				}
 			}
 			function add_stripe_gateway_class( $methods ) {
