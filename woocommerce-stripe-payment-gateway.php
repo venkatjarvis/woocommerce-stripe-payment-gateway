@@ -81,6 +81,9 @@
 				        'redirect'  => $this->get_return_url( $order )
 				    );
 				}
+				function process_refund($order_id){
+					
+				}
 			}
 			function add_stripe_gateway_class( $methods ) {
 				$methods[] = 'WC_Stripe_Gateway';
